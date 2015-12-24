@@ -23,18 +23,17 @@ public class ConvertJsonToObjects {
 
     public ConvertJsonToObjects() {
         this.youTubeVideos = new ArrayList<>();
-        result = new SearchResult();
     }
 
     public SearchResult convert(JSONObject response){
 
         try {
             JSONArray items = response.getJSONArray("items");
-
+            JSONObject item = null;
             for(int i = 0 ; i < items.length(); i++){
                 //get json objects
 
-                JSONObject item = items.getJSONObject(i);
+                item = items.getJSONObject(i);
                 JSONObject id = item.getJSONObject("id");
                 JSONObject snippet = item.getJSONObject("snippet");
                 JSONObject thumb = snippet.getJSONObject("thumbnails");
@@ -71,11 +70,14 @@ public class ConvertJsonToObjects {
             //get result search full object
 
             result = new SearchResult();
+            JSONObject pageInfo =  response.getJSONObject("pageInfo");
+
             String kind = response.getString("kind");
             String etag = response.getString("etag");
             String nextPageToken = response.getString("nextPageToken");
-            int totalResults = response.getInt("totalResults");
-            int resultsPerPage = response.getInt("resultsPerPage");
+
+            int totalResults = pageInfo.getInt("totalResults");
+            int resultsPerPage = pageInfo.getInt("resultsPerPage");
 
             result.setKind(kind);
             result.setEtag(etag);
@@ -88,6 +90,7 @@ public class ConvertJsonToObjects {
             Log.e(TAG, e.getMessage());
         }
 
+        Log.d(TAG, result.toString());
         return result;
     }
 }

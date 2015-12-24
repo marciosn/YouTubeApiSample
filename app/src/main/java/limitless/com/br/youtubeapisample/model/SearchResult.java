@@ -110,4 +110,15 @@ public class SearchResult implements Parcelable{
     public void setYouTubeVideos(List<YouTubeVideo> youTubeVideos) {
         this.youTubeVideos = youTubeVideos;
     }
+
+    @Override
+    public String toString() {
+        return "SearchResult{" +
+                "kind='" + kind + '\'' +
+                ", etag='" + etag + '\'' +
+                ", nextPageToken='" + nextPageToken + '\'' +
+                ", totalResults=" + totalResults +
+                ", resultsPerPage=" + resultsPerPage +
+                '}';
+    }
 }

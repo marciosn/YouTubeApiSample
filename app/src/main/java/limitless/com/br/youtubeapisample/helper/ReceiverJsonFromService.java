@@ -22,10 +22,9 @@ import limitless.com.br.youtubeapisample.model.SearchResult;
 public class ReceiverJsonFromService {
 
     private static final String TAG = ReceiverJsonFromService.class.getSimpleName();
-    private AppConfig appConfig;
     private Context context;
     private RequestQueue requestQueue;
-    private String URL = appConfig.YOUTUBE_API_URL;
+    private String URL = AppConfig.YOUTUBE_API_URL;
     private ConvertJsonToObjects convertJsonToObjects;
     private SearchResult searchResult;
 

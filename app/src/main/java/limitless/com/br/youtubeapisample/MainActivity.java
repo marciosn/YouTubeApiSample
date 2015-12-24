@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import limitless.com.br.youtubeapisample.adapter.Adapter;
+import limitless.com.br.youtubeapisample.app.AppConfig;
 import limitless.com.br.youtubeapisample.model.SearchResult;
 import limitless.com.br.youtubeapisample.model.YouTubeVideo;
 
@@ -68,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
             });
 
             Intent intent = getIntent();
-            searchResult = intent.getParcelableExtra("RESULT");
+            searchResult = intent.getParcelableExtra(AppConfig.RESULT);
+
+            Toast.makeText(this, searchResult.toString(), Toast.LENGTH_LONG).show();
 
             if (searchResult == null) {
                 youTubeVideos = new ArrayList<>();
