@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import limitless.com.br.youtubeapisample.model.SearchResult;
 import limitless.com.br.youtubeapisample.model.YouTubeVideo;
 
 /**
@@ -18,16 +19,19 @@ public class ConvertJsonToObjects {
 
     private static final String TAG = ConvertJsonToObjects.class.getSimpleName();
     private List<YouTubeVideo> youTubeVideos;
+    private SearchResult result;
 
     public ConvertJsonToObjects() {
         this.youTubeVideos = new ArrayList<>();
+        result = new SearchResult();
     }
 
-    public List<YouTubeVideo> convert(JSONArray items){
+    public SearchResult convert(JSONObject response){
 
         try {
-            for(int i = 0 ; i < items.length(); i++){
+            JSONArray items = response.getJSONArray("items");
 
+            for(int i = 0 ; i < items.length(); i++){
                 //get json objects
 
                 JSONObject item = items.getJSONObject(i);
@@ -64,11 +68,26 @@ public class ConvertJsonToObjects {
                 youTubeVideos.add(youTubeVideo);
             }
 
+            //get result search full object
+
+            result = new SearchResult();
+            String kind = response.getString("kind");
+            String etag = response.getString("etag");
+            String nextPageToken = response.getString("nextPageToken");
+            int totalResults = response.getInt("totalResults");
+            int resultsPerPage = response.getInt("resultsPerPage");
+
+            result.setKind(kind);
+            result.setEtag(etag);
+            result.setNextPageToken(nextPageToken);
+            result.setTotalResults(totalResults);
+            result.setResultsPerPage(resultsPerPage);
+            result.setYouTubeVideos(youTubeVideos);
+
         } catch (JSONException e) {
-            e.printStackTrace();
             Log.e(TAG, e.getMessage());
         }
 
-        return  youTubeVideos;
+        return result;
     }
 }

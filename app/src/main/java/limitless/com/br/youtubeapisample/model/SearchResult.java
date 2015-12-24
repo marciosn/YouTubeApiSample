@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Márcio Sn on 24/12/2015.
  */
-public class SearchInfo implements Parcelable{
+public class SearchResult implements Parcelable{
 
     private String kind;
     private String etag;
@@ -18,7 +18,7 @@ public class SearchInfo implements Parcelable{
     private int resultsPerPage;
     private List<YouTubeVideo> youTubeVideos;
 
-    protected SearchInfo() {
+    public SearchResult() {
         kind = "";
         etag = "";
         nextPageToken = "";
@@ -27,7 +27,7 @@ public class SearchInfo implements Parcelable{
         this.youTubeVideos = Collections.emptyList();
     }
 
-    protected SearchInfo(Parcel in) {
+    protected SearchResult(Parcel in) {
         kind = in.readString();
         etag = in.readString();
         nextPageToken = in.readString();
@@ -36,15 +36,15 @@ public class SearchInfo implements Parcelable{
         youTubeVideos = in.createTypedArrayList(YouTubeVideo.CREATOR);
     }
 
-    public static final Creator<SearchInfo> CREATOR = new Creator<SearchInfo>() {
+    public static final Creator<SearchResult> CREATOR = new Creator<SearchResult>() {
         @Override
-        public SearchInfo createFromParcel(Parcel in) {
-            return new SearchInfo(in);
+        public SearchResult createFromParcel(Parcel in) {
+            return new SearchResult(in);
         }
 
         @Override
-        public SearchInfo[] newArray(int size) {
-            return new SearchInfo[size];
+        public SearchResult[] newArray(int size) {
+            return new SearchResult[size];
         }
     };
 
