@@ -1,4 +1,4 @@
-package limitless.com.br.youtubeapisample;
+package limitless.com.br.youtubeapisample.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
@@ -21,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import java.util.ArrayList;
 import java.util.List;
 
+import limitless.com.br.youtubeapisample.R;
 import limitless.com.br.youtubeapisample.adapter.Adapter;
 import limitless.com.br.youtubeapisample.adapter.RecyclerItemClickListener;
 import limitless.com.br.youtubeapisample.app.AppConfig;
@@ -87,7 +87,15 @@ public class MainActivity extends AppCompatActivity {
                     new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
                         @Override
                         public void onItemClick(View view, int position) {
-                            Toast.makeText(MainActivity.this, "" + position, Toast.LENGTH_LONG).show();
+
+                            if (!youTubeVideos.isEmpty() && youTubeVideos != null) {
+                                YouTubeVideo youTubeVideo = youTubeVideos.get(position);
+
+                                Intent intent = new Intent(MainActivity.this, ShowVideo.class);
+                                intent.putExtra(AppConfig.RESULT, youTubeVideo);
+                                startActivity(intent);
+                            }
+                            //Toast.makeText(MainActivity.this, "" + position, Toast.LENGTH_LONG).show();
                         }
                     })
             );

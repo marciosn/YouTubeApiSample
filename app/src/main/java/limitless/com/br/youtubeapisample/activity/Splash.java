@@ -1,4 +1,4 @@
-package limitless.com.br.youtubeapisample;
+package limitless.com.br.youtubeapisample.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import limitless.com.br.youtubeapisample.R;
 import limitless.com.br.youtubeapisample.app.AppConfig;
 import limitless.com.br.youtubeapisample.helper.ConvertJsonToObjects;
 import limitless.com.br.youtubeapisample.model.SearchResult;

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">YouTube Api</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_show_video">ShowVideo</string>
 </resources>
