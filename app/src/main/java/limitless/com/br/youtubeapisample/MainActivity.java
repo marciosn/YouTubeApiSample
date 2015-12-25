@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import limitless.com.br.youtubeapisample.adapter.Adapter;
+import limitless.com.br.youtubeapisample.adapter.RecyclerItemClickListener;
 import limitless.com.br.youtubeapisample.app.AppConfig;
 import limitless.com.br.youtubeapisample.model.SearchResult;
 import limitless.com.br.youtubeapisample.model.YouTubeVideo;
@@ -72,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = getIntent();
             searchResult = intent.getParcelableExtra(AppConfig.RESULT);
 
-            Toast.makeText(this, searchResult.toString(), Toast.LENGTH_LONG).show();
-
             if (searchResult == null) {
                 youTubeVideos = new ArrayList<>();
             }else {
@@ -82,6 +82,15 @@ public class MainActivity extends AppCompatActivity {
 
             adapter = new Adapter(youTubeVideos);
             recyclerView.setAdapter(adapter);
+
+            recyclerView.addOnItemTouchListener(
+                    new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            Toast.makeText(MainActivity.this, "" + position, Toast.LENGTH_LONG).show();
+                        }
+                    })
+            );
 
         } catch (Exception e) {
             Log.e(TAG, e.toString());
@@ -99,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
+        // automatically handle clicks on the Home/Up background, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 

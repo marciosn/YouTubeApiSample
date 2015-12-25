@@ -10,16 +10,4 @@
     tools:context="limitless.com.br.youtubeapisample.Splash"
     android:background="@color/colorPrimary">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="YouTube Api"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="164dp"
-        android:textColor="#ffffff"
-        android:textStyle="italic"
-        android:textSize="48dp"/>
 </RelativeLayout>

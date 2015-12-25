@@ -55,7 +55,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         YouTubeVideo video = itens.get(position);
         holder.title.setText(video.getTitle());
-        holder.description.setText("description...");
+        holder.description.setText("");
         holder.date.setText(video.getPublishedAt());
         holder.imageView.setImageUrl(video.getThumbnailMedium(), imageLoader);
     }
