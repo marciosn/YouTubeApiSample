@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class ConvertJsonToObjects {
                 String thumb_medium = medium_thumb.getString("url");
                 String thumb_high = high_thumb.getString("url");
                 String description = snippet.getString("description");
-                String publishedAt = snippet.getString("publishedAt");
+                String publishedAt = convertToDate( snippet.getString("publishedAt") );
                 String channelTitle = snippet.getString("channelTitle");
 
                 YouTubeVideo youTubeVideo = new YouTubeVideo();
@@ -92,5 +93,17 @@ public class ConvertJsonToObjects {
 
         Log.d(TAG, result.toString());
         return result;
+    }
+
+    public static String convertToDate(String publishedAt){
+        long epoch = 0L;
+        String date = "";
+        try {
+            epoch = new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse( publishedAt ).getTime() / 1000;
+            date = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm").format( new java.util.Date ( epoch * 1000 ) );
+        } catch (ParseException e) {
+            Log.e(TAG, e.getMessage());
+        }
+        return date;
     }
 }
